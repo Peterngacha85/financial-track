@@ -58,6 +58,10 @@ body {
     color: #ffffff;
 }
 
+.blue {
+    color: #0070f3;
+}
+
 #signup-link, #login-link {
     color: #0070f3;
     text-decoration: none;
