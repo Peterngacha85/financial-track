@@ -4,7 +4,19 @@ body {
 }
 
 .navbar {
+    background-color: #0070f3; /* Meta-inspired color */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky; /* Make the navbar stick to the top */
+    top: 0; /* Ensure it sticks to the top */
+    z-index: 1000; /* Ensure it stays above other content */
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #000000; /* Black text for visibility */
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: #eaeaea; /* Light gray text on hover */
 }
 
 .card {
@@ -19,35 +31,34 @@ body {
 }
 
 .btn-primary {
-    background-color: #1877f2;
-    border-color: #1877f2;
+    background-color: #0070f3; /* Match the navbar color */
+    border-color: #0070f3;
 }
 
 .btn-primary:hover {
-    background-color: #166fe5;
-    border-color: #166fe5;
+    background-color: #005bb5; /* Darker shade on hover */
+    border-color: #005bb5;
 }
 
 .form-control:focus, .form-select:focus {
-    border-color: #1877f2;
-    box-shadow: 0 0 0 0.2rem rgba(24, 119, 242, 0.25);
+    border-color: #0070f3;
+    box-shadow: 0 0 0 0.2rem rgba(0, 112, 243, 0.25);
 }
 
 #category-chart {
     max-height: 300px;
 }
 
-/* New styles for login page */
 .container.mt-5 {
     margin-top: 10vh !important;
 }
 
 .card-title {
-    color: #1877f2;
+    color: #0070f3;
 }
 
 #signup-link, #login-link {
-    color: #1877f2;
+    color: #0070f3;
     text-decoration: none;
 }
 
