@@ -63,6 +63,7 @@ class AuthManager {
                 <input type="password" class="form-control" id="confirm-password" required>
             </div>
             <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+            <div id="signup-error" class="text-danger mt-3"></div> <!-- Error container -->
         `;
         loginForm.removeEventListener('submit', (e) => this.handleLogin(e));
         loginForm.addEventListener('submit', (e) => this.handleSignup(e));
@@ -162,7 +163,12 @@ class AuthManager {
     }
 
     showError(message) {
-        alert(message);
+        const errorContainer = document.getElementById('signup-error');
+        if (errorContainer) {
+            errorContainer.textContent = message;
+        } else {
+            console.error(message); // Fallback to console if container is not found
+        }
     }
 
     hashPassword(password) {
