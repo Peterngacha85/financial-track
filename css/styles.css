@@ -1,0 +1,56 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+    background-color: #1877f2;
+    border-color: #1877f2;
+}
+
+.btn-primary:hover {
+    background-color: #166fe5;
+    border-color: #166fe5;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #1877f2;
+    box-shadow: 0 0 0 0.2rem rgba(24, 119, 242, 0.25);
+}
+
+#category-chart {
+    max-height: 300px;
+}
+
+/* New styles for login page */
+.container.mt-5 {
+    margin-top: 10vh !important;
+}
+
+.card-title {
+    color: #1877f2;
+}
+
+#signup-link, #login-link {
+    color: #1877f2;
+    text-decoration: none;
+}
+
+#signup-link:hover, #login-link:hover {
+    text-decoration: underline;
+}
