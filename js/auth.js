@@ -1,7 +1,6 @@
 class AuthManager {
     constructor() {
         this.currentUser = null;
-        this.isSignupMode = false;
         this.init();
     }
 
@@ -12,30 +11,27 @@ class AuthManager {
 
     attachEventListeners() {
         const loginForm = document.getElementById('login-form');
-        const toggleFormLink = document.getElementById('toggle-form-link');
+        const signupLink = document.getElementById('signup-link');
+        const logoutLink = document.getElementById('logout-link');
 
         if (loginForm) {
-            loginForm.addEventListener('submit', (e) => this.handleFormSubmit(e));
+            loginForm.addEventListener('submit', (e) => this.handleLogin(e));
         }
 
-        if (toggleFormLink) {
-            toggleFormLink.addEventListener('click', (e) => this.toggleForm(e));
+        if (signupLink) {
+            signupLink.addEventListener('click', (e) => this.showSignupForm(e));
+        }
+
+        if (logoutLink) {
+            logoutLink.addEventListener('click', (e) => this.handleLogout(e));
         }
     }
 
-    handleFormSubmit(e) {
+    handleLogin(e) {
         e.preventDefault();
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
 
-        if (this.isSignupMode) {
-            this.handleSignup(username, password);
-        } else {
-            this.handleLogin(username, password);
-        }
-    }
-
-    handleLogin(username, password) {
         try {
             const users = this.getUsers();
             if (users[username] && users[username].password === this.hashPassword(password)) {
@@ -50,9 +46,42 @@ class AuthManager {
         }
     }
 
-    handleSignup(username, password) {
+    showSignupForm(e) {
+        e.preventDefault();
+        const loginForm = document.getElementById('login-form');
+        loginForm.innerHTML = `
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" required>
+            </div>
+            <div class="mb-3">
+                <label for="confirm-password" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm-password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+        `;
+        loginForm.removeEventListener('submit', (e) => this.handleLogin(e));
+        loginForm.addEventListener('submit', (e) => this.handleSignup(e));
+        document.querySelector('.card-title').textContent = 'Sign Up for Finance Tracker';
+        document.querySelector('p.text-center').innerHTML = 'Already have an account? <a href="#" id="login-link">Login</a>';
+        document.getElementById('login-link').addEventListener('click', (e) => this.showLoginForm(e));
+    }
+
+    showLoginForm(e) {
+        e.preventDefault();
+        window.location.reload();
+    }
+
+    handleSignup(e) {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
         const confirmPassword = document.getElementById('confirm-password').value;
-        
+
         try {
             if (password !== confirmPassword) {
                 throw new Error('Passwords do not match');
@@ -70,48 +99,6 @@ class AuthManager {
         } catch (error) {
             this.showError(error.message);
         }
-    }
-
-    toggleForm(e) {
-        e.preventDefault();
-        this.isSignupMode = !this.isSignupMode;
-        this.renderForm();
-    }
-
-    renderForm() {
-        const loginForm = document.getElementById('login-form');
-        if (this.isSignupMode) {
-            loginForm.innerHTML = `
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" required>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" required>
-                </div>
-                <div class="mb-3">
-                    <label for="confirm-password" class="form-label">Confirm Password</label>
-                    <input type="password" class="form-control" id="confirm-password" required>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Sign Up</button>
-                <p class="text-center">Already have an account? <a href="#" id="toggle-form-link">Login</a></p>
-            `;
-        } else {
-            loginForm.innerHTML = `
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" required>
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" required>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Login</button>
-                <p class="text-center">Don't have an account? <a href="#" id="toggle-form-link">Sign Up</a></p>
-            `;
-        }
-        this.attachEventListeners();
     }
 
     handleLogout(e) {

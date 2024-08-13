@@ -16,14 +16,12 @@ function createCategoryChart() {
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'right'
-                },
-                title: {
-                    display: true,
-                    text: 'Spending by Category'
-                }
+            legend: {
+                position: 'right'
+            },
+            title: {
+                display: true,
+                text: 'Spending by Category'
             }
         }
     });
@@ -34,18 +32,4 @@ function updateCategoryChart() {
     categoryChart.data.labels = Object.keys(categories);
     categoryChart.data.datasets[0].data = Object.values(categories);
     categoryChart.update();
-}
-
-function getCategoryData() {
-    const categories = {};
-    transactions.forEach(transaction => {
-        if (transaction.type === 'expense') {
-            if (categories[transaction.category]) {
-                categories[transaction.category] += transaction.amount;
-            } else {
-                categories[transaction.category] = transaction.amount;
-            }
-        }
-    });
-    return categories;
 }
