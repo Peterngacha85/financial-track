@@ -47,6 +47,7 @@ body {
 
 #category-chart {
     max-height: 300px;
+    width: 100%; /* Ensure it scales with the container */
 }
 
 .container.mt-5 {
@@ -64,4 +65,26 @@ body {
 
 #signup-link:hover, #login-link:hover {
     text-decoration: underline;
+}
+
+/* Media Queries for Small Devices */
+@media (max-width: 768px) {
+    .navbar-brand img {
+        width: 25px; /* Smaller logo for smaller screens */
+        height: 25px;
+    }
+
+    #category-chart {
+        max-height: 200px; /* Smaller chart for smaller screens */
+    }
+
+    .container.mt-5 {
+        margin-top: 5vh !important; /* Adjusted margin for smaller screens */
+    }
+}
+
+@media (max-width: 576px) {
+    .card-body {
+        padding: 1rem; /* Less padding on small devices */
+    }
 }
