@@ -65,15 +65,26 @@ function updateTransactionTable() {
 }
 
 function getCategoryData() {
-    const categories = {};
+    const categories = {
+        income: {},
+        expense: {}
+    };
+
     transactions.forEach(transaction => {
-        if (transaction.type === 'expense') {
-            if (categories[transaction.category]) {
-                categories[transaction.category] += transaction.amount;
+        if (transaction.type === 'income') {
+            if (categories.income[transaction.category]) {
+                categories.income[transaction.category] += transaction.amount;
             } else {
-                categories[transaction.category] = transaction.amount;
+                categories.income[transaction.category] = transaction.amount;
+            }
+        } else if (transaction.type === 'expense') {
+            if (categories.expense[transaction.category]) {
+                categories.expense[transaction.category] += transaction.amount;
+            } else {
+                categories.expense[transaction.category] = transaction.amount;
             }
         }
     });
+
     return categories;
 }
